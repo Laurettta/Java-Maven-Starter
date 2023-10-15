@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping ("/api")
-public class FunRestController {
+public class StudentController {
 
     private List<Student> allStudents;
 

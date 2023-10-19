@@ -5,6 +5,7 @@ import com.example.coolapp.models.Student;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import com.example.coolapp.exceptions.StudentNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,10 @@ public class StudentController {
 
     @GetMapping("/students/{id}")
     public ApiResponse<Student> getStudent (@PathVariable Integer id) {
-        return new ApiResponse<>("Student data fetched successfully", Status.SUCCESS,allStudents.get(id));
+        if(id > allStudents.size() || id < 0){
+            throw new StudentNotFoundException("student with id not found "+ id);
+        }
+        return new ApiResponse<>("student data fetched successfully", Status.SUCCESS,allStudents.get(id));
 
     }
 
